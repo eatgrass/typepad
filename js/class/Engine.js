@@ -828,9 +828,12 @@ define([
 
     getWubiDict(c) {
       if (this.config.articleType !== ArticleType.word) {
+
         if (cur_dict === c) {
           return;
         }
+
+        cur_dict = c
 
         let w = Wubi[c];
         if (w) {
