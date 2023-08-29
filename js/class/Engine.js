@@ -838,7 +838,7 @@ define([
         let w = Wubi[c];
         if (w) {
           let e = encodeURIComponent(c);
-          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86">${w["86"][3]}</span><span class="c86j">${w["86"][2]}</span><img src="https://c.cidianwang.com/file/wubi/${e}.gif" class="wubi-img">
+          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86j">${w["86"][2].toUpperCase()}</span><img src="https://c.cidianwang.com/file/wubi/${e}.gif" class="wubi-img">
             `;
         }
       }
