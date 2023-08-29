@@ -47,7 +47,7 @@ define([
 
       this.correctWordsCount = 0;
 
-      this.currentWords = ""; // 显示的当前分段对照文字
+      this._currentWords = ""; // 显示的当前分段对照文字
       this.currentOriginWords = []; // 原始对照文字拆分的全部数组
       this.arrayWordAll = []; // 全部单词
       this.arrayWordDisplaying = []; // 展示的单词
@@ -139,6 +139,14 @@ define([
       };
     }
 
+    set currentWords(words) {
+      this._currentWords = words;
+      this.compare();
+    }
+
+    get currentWords() {
+      return this._currentWords;
+    }
     // 进入极简模式
     enterStandAloneMode() {
       let screenHeight = innerHeight;
@@ -251,7 +259,6 @@ define([
         }
       }
       template.innerText = this.currentWords;
-      this.compare();
     }
 
     fetchAllLog() {
@@ -812,7 +819,7 @@ define([
       let offsetTop = $("." + untypedStringClassName).offsetTop;
       templateWrapper.scrollTo(0, offsetTop - HEIGHT_TEMPLATE / 2);
 
-      this.getWubiDict(untypedString.substring(0,1));
+      this.getWubiDict(untypedString.substring(0, 1));
       if (this.config.articleType === ArticleType.word) {
         // 获取单词释义
         this.getCurrentCETWordTranslation(arrayTyped.length);
@@ -828,7 +835,7 @@ define([
         let w = Wubi[c];
         if (w) {
           let e = encodeURIComponent(c);
-          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86">${w["86"][3]}</span><span class="c86j">${w["86"][2]}</span><img src="https://www.iamwawa.cn/Data/wubi/${e}.png" class="wubi-img">
+          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86">${w["86"][3]}</span><span class="c86j">${w["86"][2]}</span><img src="https://c.cidianwang.com/file/wubi/${e}.gif" class="wubi-img">
             `;
         }
       }
