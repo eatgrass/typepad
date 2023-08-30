@@ -115,7 +115,7 @@ define(['Utility', 'ArticleType'], function (Utility, ArticleType) {
          return `<tr>  
               <td class="text-center">${cursor.key}</td>
               <td class="bold galvji speed text-right lv-${level}">${cursor.value.speed.toFixed(Utility.RECORD_DISPLAY_ACCURACY)}</td>
-              <td class="hidden-sm">${cursor.value.hitRate.toFixed(Utility.RECORD_DISPLAY_ACCURACY)}</td>
+              <td class="hidden-sm">${cursor.value.hitRate ? cursor.value.hitRate.toFixed(Utility.RECORD_DISPLAY_ACCURACY): 0}</td>
               <td class="hidden-sm">${cursor.value.codeLength.toFixed(Utility.RECORD_DISPLAY_ACCURACY)}</td>
               <td class="hidden-sm">${cursor.value.backspace}</td>
               <td>${cursor.value.wordCount}</td>

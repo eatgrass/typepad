@@ -141,7 +141,7 @@ define([
 
     set currentWords(words) {
       this._currentWords = words;
-      this.compare();
+      this.compare(true);
     }
 
     get currentWords() {
@@ -685,7 +685,7 @@ define([
     }
 
     // 对比上屏字，主要对比算法 IMPORTANT!
-    compare() {
+    compare(changed) {
       this.correctWordsCount = 0;
       let typedWords = typingPad.value;
       let arrayOrigin = this.currentWords.split(""); // 对照区的字、字母
@@ -819,26 +819,34 @@ define([
       let offsetTop = $("." + untypedStringClassName).offsetTop;
       templateWrapper.scrollTo(0, offsetTop - HEIGHT_TEMPLATE / 2);
 
-      this.getWubiDict(untypedString.substring(0, 1));
+      this.getWubiDict(untypedString.substring(0, 1), changed);
       if (this.config.articleType === ArticleType.word) {
         // 获取单词释义
         this.getCurrentCETWordTranslation(arrayTyped.length);
       }
     }
 
-    getWubiDict(c) {
+    getWubiDict(c, changed) {
       if (this.config.articleType !== ArticleType.word) {
+        console.log(c, changed);
+        if (c == "" && changed) {
+          c = this.currentWords.substring(0, 1);
+        }
 
         if (cur_dict === c) {
           return;
         }
 
-        cur_dict = c
+        cur_dict = c;
 
         let w = Wubi[c];
         if (w) {
           let e = encodeURIComponent(c);
-          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86">${(w["86"][3]||w["86"][2]||'').toUpperCase()}</span><img src="https://c.cidianwang.com/file/wubi/${e}.gif" class="wubi-img">
+          dict_panel.innerHTML = `<span class="cur_text">${c}</span><span class="c86">${(
+            w["86"][3] ||
+            w["86"][2] ||
+            ""
+          ).toUpperCase()}</span><img src="https://c.cidianwang.com/file/wubi/${e}.gif" class="wubi-img">
             `;
         }
       }
@@ -1272,7 +1280,9 @@ define([
         currentArticleTypeScore.speedAve.toFixed(1);
 
       $(".score-info-item.hitrate-min .score").innerText =
-        currentArticleTypeScore.hitRateMin.toFixed(1);
+        currentArticleTypeScore.hitRateMin
+          ? currentArticleTypeScore.hitRateMin.toFixed(1)
+          : 0;
       $(".score-info-item.hitrate-max .score").innerText =
         currentArticleTypeScore.hitRateMax.toFixed(1);
       $(".score-info-item.hitrate-ave .score").innerText =

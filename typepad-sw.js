@@ -15,7 +15,6 @@ self.addEventListener('install', event => {
 
             // 汉语单词
             '/js/class/phrase/Phrase.js?v=2.66b2',
-
             '/js/class/Database.js?v=2.66b2',
             '/js/class/Utility.js?v=2.66b2',
             '/js/class/KeyCount.js?v=2.66b2',
@@ -29,6 +28,7 @@ self.addEventListener('install', event => {
             '/js/class/CETWord.js?v=2.66b2',
             '/js/require_v2.3.6.js',
             '/js/typepad.js?v=2.66b2',
+            '/js/class/Wubi.js',
             '/img/logo.png',
             '/scss/font/DSDigital.ttf',
             '/scss/font/Galvji.ttf',
