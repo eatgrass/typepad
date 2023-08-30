@@ -816,8 +816,9 @@ define([
       template.innerHTML = html;
 
       // 滚动对照区到当前所输入的位置
-      let offsetTop = $("." + untypedStringClassName).offsetTop;
-      templateWrapper.scrollTo(0, offsetTop - HEIGHT_TEMPLATE / 2);
+      let offsetTop = $("." + untypedStringClassName).offsetTop - $(".wubi-map").clientHeight;
+      let y = offsetTop - HEIGHT_TEMPLATE / 2;
+      templateWrapper.scrollTo(0, y);
 
       this.getWubiDict(untypedString.substring(0, 1), changed);
       if (this.config.articleType === ArticleType.word) {
@@ -828,7 +829,6 @@ define([
 
     getWubiDict(c, changed) {
       if (this.config.articleType !== ArticleType.word) {
-        console.log(c, changed);
         if (c == "" && changed) {
           c = this.currentWords.substring(0, 1);
         }
